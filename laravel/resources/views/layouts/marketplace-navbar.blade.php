@@ -20,7 +20,7 @@
     </div>
 </button>
     <div class="flex md:flex-wrap items-center justify-around md:justify-between md:mx-auto py-2 px-2 md:px-12">
-        <a href="/" class="items-center cursor-pointer hidden md:block">
+        <a href="/home-page" class="items-center cursor-pointer hidden md:block">
             <img src="{{ asset('img/logo orange.png') }}" class="scale-90">
         </a>
         <div class="flex items-center my-auto lg:flex-grow w-1/2 md:w-fit">
@@ -69,7 +69,15 @@
         @else
         <div class="dropdown-profile my-auto">
             <button type="button" class="flex space-x-4" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                <span class="i-bi-people-circle w-5 h-5 m-1.5"></span>
+                @php
+                    $user = Auth::user();
+                @endphp
+                @if($user->foto_profil == null)
+                <span class="i-bi-people-circle w-6 h-6"></span>
+                <!-- kl ada foto profil -->
+                @else
+                <img src="{{asset('storage/foto_user/'.$user->foto_profil)}}" alt="" class="w-6 h-6 rounded-full">
+                @endif
             </button>
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown">
                 <div class="px-4 py-3">
